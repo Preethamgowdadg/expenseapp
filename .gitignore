@@ -1,0 +1,14 @@
+*.pyc  
+*~  
+__pycache__  
+myvenv  
+db.sqlite3  
+/static  
+.DS_Store  
+# Django settings
+myproject/settings.py
+myproject/settings/*.secret_key
+
+# Virtual environment
+venv/
+env/
