@@ -13,5 +13,5 @@ class CustomUserCreationForm(UserCreationForm):
 class ExpenseForm(forms.ModelForm):
     class Meta:
         model = Expense
-        fields = ['date', 'amount', 'mode']
+        fields = ['date', 'amount', 'mode','reason','related_user_id']
 
