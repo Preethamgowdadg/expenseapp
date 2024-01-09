@@ -4,9 +4,10 @@ from django.shortcuts import render
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render, redirect
-from .models import CustomUser
+from .models import CustomUser,Expense
 from django.contrib.auth.hashers import check_password
-from .forms import CustomUserCreationForm
+from .forms import CustomUserCreationForm,ExpenseForm
+from django.contrib.auth.views import LogoutView
 
 
 def login_view(request):
@@ -20,7 +21,8 @@ def login_view(request):
             password_ = user_data.password
             passwords_match = check_password(password, password_)
             if email == email_ and passwords_match:
-                    return success_view(request)
+                    return redirect('details')
+                    # return success_view(request)
             else:
                 message = "Wrong password"
         except CustomUser.DoesNotExist:
@@ -44,3 +46,25 @@ def success_view(request):
 
 def not_registered(request):
     return render(request, 'not_registered.html')
+
+
+
+def details_view(request):
+    if request.method == 'POST':
+        form = ExpenseForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('details')
+            # You might want to add a success message or redirect to another page
+    else:
+        form = ExpenseForm()
+
+    return render(request, 'details.html', {'form': form})
+
+
+logout_view = LogoutView.as_view(next_page='login')
+
+
+def view_details(request):
+    expenses = Expense.objects.all()
+    return render(request, 'view_details.html', {'expenses': expenses})

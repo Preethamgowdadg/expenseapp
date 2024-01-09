@@ -1,0 +1,49 @@
+<!-- templates/view_details.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Expense Details</title>
+    <!-- Include Bootstrap CSS (you might need to adjust the path or use a CDN) -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Expense Details</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Sl. No</th>
+                    <th>Date</th>
+                    <th>Amount</th>
+                    <th>Mode</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% with total_amount=0 %}
+                    {% for expense in expenses %}
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td>{{ expense.date }}</td>
+                            <td>{{ expense.amount }}</td>
+                            <td>{{ expense.mode }}</td>
+                        </tr>
+                        {% with total_amount=total_amount|add:expense.amount %}
+                    {% endwith %}
+                    {% endfor %}
+                {% endwith %}
+                <tr>
+                    <td colspan="2"></td>
+                    <td><strong>Grand Total:</strong></td>
+                    <td><strong>{{ total_amount }}</strong></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <!-- Include Bootstrap JS (you might need to adjust the path or use a CDN) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

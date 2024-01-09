@@ -1,15 +1,15 @@
 <!-- accounts/templates/accounts/register.html -->
-{% extends 'base.html' %}
+<!-- {% extends 'base.html' %} -->
 
 {% block content %}
-    <h2>Register</h2>
-    <form method="post" action="{% url 'register' %}">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Register</button>
-    </form>
+  <h2>Register</h2>
+  <form method="post" action="{% url 'register' %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Register</button>
+  </form>
 
-    <div class="login-link">
-        <p>Already have an account? <a href="{% url 'login' %}">Login here</a></p>
-    </div>
+  <div class="login-link">
+    <p>Already have an account? <a href="{% url 'login' %}">Login here</a></p>
+  </div>
 {% endblock %}

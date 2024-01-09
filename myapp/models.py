@@ -26,3 +26,7 @@ class CustomUserManager(BaseUserManager):
         extra_fields.setdefault('is_superuser', True)
         return self.create_user(email, password, **extra_fields)
 
+class Expense(models.Model):
+    date = models.DateField()
+    amount = models.DecimalField(max_digits=10, decimal_places=2)
+    mode = models.CharField(max_length=255)
