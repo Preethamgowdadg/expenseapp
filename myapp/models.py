@@ -30,3 +30,5 @@ class Expense(models.Model):
     date = models.DateField()
     amount = models.DecimalField(max_digits=10, decimal_places=2)
     mode = models.CharField(max_length=255)
+    reason = models.CharField(max_length = 1000)
+    related_user_id = models.IntegerField()

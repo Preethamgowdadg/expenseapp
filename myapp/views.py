@@ -21,6 +21,7 @@ def login_view(request):
             password_ = user_data.password
             passwords_match = check_password(password, password_)
             if email == email_ and passwords_match:
+                    request.session['user_email'] = email
                     return redirect('details')
                     # return success_view(request)
             else:
@@ -50,6 +51,9 @@ def not_registered(request):
 
 
 def details_view(request):
+    user_email = request.session.get('user_email', None)
+    user_data = CustomUser.objects.get(email=user_email)
+    print('++++++==',user_data)
     if request.method == 'POST':
         form = ExpenseForm(request.POST)
         if form.is_valid():
@@ -59,7 +63,7 @@ def details_view(request):
     else:
         form = ExpenseForm()
 
-    return render(request, 'details.html', {'form': form})
+    return render(request, 'details.html', {'form': form,'user_data':user_data})
 
 
 logout_view = LogoutView.as_view(next_page='login')
