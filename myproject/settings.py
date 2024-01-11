@@ -60,7 +60,7 @@ ROOT_URLCONF = 'myproject.urls'
 
 # settings.py
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'yourdomain.com', '127.0.0.1:8001','127.0.0.1:8004','59bf-115-246-208-206.ngrok-free.app']
+ALLOWED_HOSTS = ['*']
 
 
 TEMPLATES = [
@@ -85,14 +85,20 @@ WSGI_APPLICATION = 'myproject.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'django',
+#         'USER': 'postgres',
+#         'PASSWORD': 'Dg41199',
+#         'HOST': 'localhost',
+#         'PORT': '5432',
+#     }
+# }
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'django',
-        'USER': 'postgres',
-        'PASSWORD': 'Dg41199',
-        'HOST': 'localhost',
-        'PORT': '5432',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 # DATABASES = {
@@ -148,6 +154,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = os.path.join(BASE_DIR,'static_files')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
