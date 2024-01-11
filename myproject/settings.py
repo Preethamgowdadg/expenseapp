@@ -138,6 +138,6 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'),]
 #     BASE_DIR / "static",
 # ]
 
-CSRF_TRUSTED_ORIGINS = ['https://59bf-115-246-208-206.ngrok-free.app']
+CSRF_TRUSTED_ORIGINS = ['	http://expenseapp-production.up.railway.app']
 
 #mongodb+srv://preethamvirat41199:P8TvZhOftt2bhBQs@cluster0.ox3pjyq.mongodb.net/?retryWrites=true&w=majority&authMechanism=SCRAM-SHA-1
