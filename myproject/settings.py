@@ -85,38 +85,13 @@ WSGI_APPLICATION = 'myproject.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'django',
-#         'USER': 'postgres',
-#         'PASSWORD': 'Dg41199',
-#         'HOST': 'localhost',
-#         'PORT': '5432',
-#     }
-# }
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'djongo',
-#         'NAME': 'jango',  # Replace with your desired database name
-#         'ENFORCE_SCHEMA': False,
-#         'CLIENT': {
-#             'host': 'mongodb+srv://preethamvirat41199:P8TvZhOftt2bhBQs@cluster0.ox3pjyq.mongodb.net/?retryWrites=true&w=majority',
-#             'port': 27017,
-#             'username': 'preethamvirat41199',
-#             'password': 'P8TvZhOftt2bhBQs',
-#             'name': 'jango',  # Same as 'NAME' above
-#             'authSource': 'admin',
-#             'authMechanism': 'SCRAM-SHA-1',
-#         }
-#     }
-# }
 
 
 # Password validation
