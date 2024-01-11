@@ -8,6 +8,7 @@ from .models import CustomUser,Expense
 from django.contrib.auth.hashers import check_password
 from .forms import CustomUserCreationForm,ExpenseForm
 from django.contrib.auth.views import LogoutView
+from django.shortcuts import redirect, get_object_or_404
 
 
 def login_view(request):
@@ -33,8 +34,9 @@ def login_view(request):
     return render(request, 'login.html')
 
 def register(request):
-    if request.method == 'POST':
+    if request.method == 'GET' or request.method == 'POST':
         form = CustomUserCreationForm(request.POST)
+        print(form.is_valid())
         if form.is_valid():
             form.save()
             return redirect('login')
@@ -48,21 +50,17 @@ def success_view(request):
 def not_registered(request):
     return render(request, 'not_registered.html')
 
-
-
 def details_view(request):
     user_email = request.session.get('user_email', None)
     user_data = CustomUser.objects.get(email=user_email)
-    print('++++++==',user_data)
     if request.method == 'POST':
-        form = ExpenseForm(request.POST)
+        form = ExpenseForm(request.POST, initial={'user_email': user_email})
         if form.is_valid():
             form.save()
             return redirect('details')
             # You might want to add a success message or redirect to another page
     else:
         form = ExpenseForm()
-
     return render(request, 'details.html', {'form': form,'user_data':user_data})
 
 
@@ -70,5 +68,13 @@ logout_view = LogoutView.as_view(next_page='login')
 
 
 def view_details(request):
-    expenses = Expense.objects.all()
-    return render(request, 'view_details.html', {'expenses': expenses})
+    user_email = request.session.get('user_email', None)
+    user_data = CustomUser.objects.get(email=user_email)
+    expenses = Expense.objects.filter(number=user_data.id)
+    total_amount = sum(expense.amount for expense in expenses)
+    return render(request, 'view_details.html', {'expenses': expenses, 'total_amount': total_amount})
+
+def delete_expense(request, expense_id):
+    expense = get_object_or_404(Expense, id=expense_id)
+    expense.delete()
+    return redirect('view_details')

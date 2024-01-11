@@ -18,6 +18,7 @@
                     <th>Date</th>
                     <th>Amount</th>
                     <th>Mode</th>
+                    <th>Reason</th>
                 </tr>
             </thead>
             <tbody>
@@ -28,15 +29,22 @@
                             <td>{{ expense.date }}</td>
                             <td>{{ expense.amount }}</td>
                             <td>{{ expense.mode }}</td>
+                            <td>{{ expense.reason }}</td>
+                            <td>
+                                <form method="post" action="{% url 'delete_expense' expense.id %}">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                </form>
+                            </td>
                         </tr>
                         {% with total_amount=total_amount|add:expense.amount %}
-                    {% endwith %}
+                        {% endwith %}
                     {% endfor %}
                 {% endwith %}
                 <tr>
                     <td colspan="2"></td>
-                    <td><strong>Grand Total:</strong></td>
                     <td><strong>{{ total_amount }}</strong></td>
+                    <td></td>
                 </tr>
             </tbody>
         </table>

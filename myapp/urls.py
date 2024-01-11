@@ -12,4 +12,5 @@ urlpatterns = [
     path('myapp/details/', views.details_view, name='details'),
      path('myapp/logout/', LogoutView.as_view(next_page='login'), name='logout'), 
      path('myapp/view-details/', views.view_details, name='view_details'),
+     path('delete_expense/<int:expense_id>/', views.delete_expense, name='delete_expense'),
 ]

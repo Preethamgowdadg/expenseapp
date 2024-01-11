@@ -1,15 +1,86 @@
 <!-- accounts/templates/accounts/register.html -->
-<!-- {% extends 'base.html' %} -->
+{% extends 'base.html' %}
+
+{% block title %}Register{% endblock %}
 
 {% block content %}
-  <h2>Register</h2>
-  <form method="post" action="{% url 'register' %}">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Register</button>
-  </form>
+  <style>
+    .container {
+      max-width: 400px;
+      margin: 0 auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
 
-  <div class="login-link">
-    <p>Already have an account? <a href="{% url 'login' %}">Login here</a></p>
+    .register-form {
+      text-align: center;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+
+    input {
+      width: 100%;
+      padding: 8px;
+      box-sizing: border-box;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    button {
+      background-color: #4caf50;
+      color: white;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    .login-link {
+      margin-top: 15px;
+    }
+  </style>
+
+  <div class="container">
+    <div class="register-form">
+      <h2>Register</h2>
+      <form method="post" action="{% url 'register' %}">
+        {% csrf_token %}
+
+        <div class="form-group">
+          <label for="{{ form.email.id_for_label }}">Email:</label>
+          {{ form.email }}
+        </div>
+
+        <div class="form-group">
+          <label for="{{ form.password1.id_for_label }}">Password:</label>
+          {{ form.password1 }}
+        </div>
+
+        <div class="form-group">
+          <label for="{{ form.password2.id_for_label }}">Confirm Password:</label>
+          {{ form.password2 }}
+        </div>
+
+        <button type="submit">Register</button>
+      </form>
+
+      <div class="login-link">
+        <p>Already have an account? <a href="{% url 'login' %}">Login here</a></p>
+      </div>
+    </div>
   </div>
 {% endblock %}

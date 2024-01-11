@@ -13,5 +13,18 @@ class CustomUserCreationForm(UserCreationForm):
 class ExpenseForm(forms.ModelForm):
     class Meta:
         model = Expense
-        fields = ['date', 'amount', 'mode','reason','related_user_id']
+        fields = ['date', 'amount', 'mode', 'reason', 'number']
+
+    def save(self, commit=True):
+        instance = super().save(commit=False)
+        user_email = self.initial.get('user_email', None)
+        
+        if user_email:
+            user_data = CustomUser.objects.get(email=user_email)
+            instance.number = user_data.id
+
+        if commit:
+            instance.save()
+
+        return instance
 

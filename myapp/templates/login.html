@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Instagram Login</title>
+    <title>CHANDY</title>
 
     <style>
         body {
@@ -15,7 +15,7 @@
             align-items: center;
             height: 100vh;
             margin: 0;
-            background-image: url('{% static "images/3409297.jpg" %}');
+            background-image: url('{% static "images/" %}');
             background-size: cover;
             background-position: center;
         }
@@ -99,7 +99,7 @@
 </head>
 <body>
     <div class="instagram-login-container">
-        <img src="{% static 'images/311319075_5851083558246996_3779571754880161948_n_17963266810945151.png' %}" alt="App Logo" class="instagram-logo">
+        <img src="{% static 'images/6114100.png' %}" alt="Chandy" class="instagram-logo">
         <form method="post" action="{% url 'login' %}" class="login-form">
             {% csrf_token %}
             <label for="username">Username:</label>
